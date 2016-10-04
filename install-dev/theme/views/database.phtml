@@ -39,16 +39,14 @@
 			<label for="db_prefix"><?php echo $this->l('Tables prefix')?></label>
 			<input class="text" type="text" id="db_prefix" name="db_prefix" value="<?php echo htmlspecialchars($this->database_prefix) ?>" />
 		</p>
-		<?php if (_PS_MODE_DEV_): ?>
-			<p>
-				<label for="db_clear"><?php echo $this->l('Drop existing tables (mode dev)')?></label>
-				<input type="checkbox" name="database_clear" id="db_clear" value="1" <?php if ($this->database_clear): ?>checked="checked"<?php endif; ?> />
-			</p>
-		<?php endif; ?>
+		<p>
+			<label for="db_clear"><?php echo $this->l('Drop existing tables (mode dev)')?></label>
+			<input type="checkbox" name="database_clear" id="db_clear" value="1" <?php if ($this->database_clear): ?>checked="checked"<?php endif; ?> />
+		</p>
 		<p class="aligned last">
 			<input id="btTestDB" class="button" type="button" value="<?php echo $this->l('Test your database connection now!') ?>"/>
 		</p>
-		
+
 		<input class="text" type="hidden" id="rewrite_engine" name="rewrite_engine" value="0" />
 
 		<?php if ($this->errors): ?>
