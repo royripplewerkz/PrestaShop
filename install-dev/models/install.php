@@ -32,6 +32,7 @@ class InstallModelInstall extends InstallAbstractModel
      * @var FileLogger
      */
     public $logger;
+    private $_excluded_addons_modules = array();
 
     public function __construct()
     {
@@ -41,6 +42,11 @@ class InstallModelInstall extends InstallAbstractModel
         if (is_writable(_PS_ROOT_DIR_.'/log/')) {
             $this->logger->setFilename(_PS_ROOT_DIR_.'/log/'.@date('Ymd').'_installation.log');
         }
+
+        $this->_excluded_addons_modules = array(
+            'gamification',
+            'onboarding'
+        );
     }
 
     public function setError($errors)
@@ -677,7 +683,8 @@ class InstallModelInstall extends InstallAbstractModel
 
         if ($xml !== false and isset($xml->module)) {
             foreach ($xml->module as $modaddons) {
-                $addons_modules[] = array('id_module' => $modaddons->id, 'name' => $modaddons->name);
+                if (!in_array($modaddons->name, $this->_excluded_addons_modules))
+                    $addons_modules[] = array('id_module' => $modaddons->id, 'name' => $modaddons->name);
             }
         }
 
