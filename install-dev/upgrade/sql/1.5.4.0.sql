@@ -35,6 +35,12 @@ CREATE TABLE `PREFIX_tab_module_preference` (
 
 /* PHP:p1540_add_missing_columns(); */;
 
+/** ADDED BY RIPPLEWERKZ **/
+/** DROP EXSITING `product_sqlstock` UNIQUE KEY FIRST **/
+/** Uncomment below sql only if there is issue **/
+/* ALTER TABLE `PREFIX_stock_available` DROP KEY `product_sqlstock`; */
+/** END OF ADDING **/
+
 ALTER TABLE `PREFIX_stock_available` ADD UNIQUE `product_sqlstock` (`id_product`, `id_product_attribute`, `id_shop`, `id_shop_group`);
 
 UPDATE PREFIX_configuration SET `value` = '8388608' WHERE `name` = 'PS_PRODUCT_PICTURE_MAX_SIZE' AND `value` <= '524288';

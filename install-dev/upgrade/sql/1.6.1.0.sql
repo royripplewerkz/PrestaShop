@@ -71,6 +71,12 @@ SELECT 0, t.id_tag, t.id_lang, ps.id_shop, COUNT(pt.id_tag) AS times
 /* PHP:alter_ignore_drop_key(cart_product, cart_product_index); */;
 
 ALTER TABLE `PREFIX_shop_group` ADD KEY `deleted` (`deleted`, `name`);
+
+/** MODIFIED BY RIPPLEWERKZ **/
+/** DROP KEY `id_group_shop` instead of `id_shop_group` **/
+/* ALTER TABLE `PREFIX_shop_group` DROP KEY `id_group_shop`; */
+/** END OF MODIFICATION **/
+
 ALTER TABLE `PREFIX_shop` DROP KEY `id_shop_group`;
 ALTER TABLE `PREFIX_shop` ADD KEY `id_shop_group` (`id_shop_group`, `deleted`);
 ALTER TABLE `PREFIX_shop_url` DROP KEY `id_shop`;
@@ -211,6 +217,12 @@ ALTER TABLE `PREFIX_order_invoice` ADD `delivery_address` TEXT DEFAULT NULL AFTE
 INSERT INTO `PREFIX_hook` (`name`, `title`, `description`) VALUES ('displayInvoiceLegalFreeText', 'PDF Invoice - Legal Free Text', 'This hook allows you to modify the legal free text on PDF invoices');
 
 UPDATE `PREFIX_hook` SET position = 0 WHERE name LIKE 'action%';
+
+/** ADDED BY RIPPLEWERKZ **/
+/** DROP EXSITING `id_product_2` UNIQUE KEY FIRST **/
+/** Uncomment below sql only if there is issue **/
+/* ALTER TABLE `ps_specific_price` DROP KEY `id_product_2`; */
+/** #END OF ADDING **/
 
 ALTER IGNORE TABLE `PREFIX_specific_price` ADD UNIQUE KEY `id_product_2` (`id_cart`, `id_product`,`id_shop`,`id_shop_group`,`id_currency`,`id_country`,`id_group`,`id_customer`,`id_product_attribute`,`from_quantity`,`id_specific_price_rule`,`from`,`to`);
 

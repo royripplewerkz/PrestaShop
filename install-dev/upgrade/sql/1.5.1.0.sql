@@ -2,6 +2,13 @@ SET NAMES 'utf8';
 
 /* PHP:image_shop1510(); */;
 ALTER TABLE `PREFIX_image_shop` DROP PRIMARY KEY;
+
+/** ADDED BY RIPPLEWERKZ **/
+/** adding missing field - `cover` **/
+/** Uncomment below sql only if there is issue **/
+/* ALTER TABLE `PREFIX_image_shop` ADD COLUMN `cover` tinyint(1) UNSIGNED default NULL AFTER `id_shop`; */
+/** END OF ADDING **/
+
 ALTER TABLE `PREFIX_image_shop` ADD INDEX (`id_image`, `id_shop`, `cover`);
 UPDATE `PREFIX_image_shop` image_shop SET image_shop.`cover`=1 WHERE `id_image` IN (SELECT `id_image` FROM `PREFIX_image` i WHERE i.`cover`=1);
 

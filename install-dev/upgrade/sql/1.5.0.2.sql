@@ -326,6 +326,12 @@ ALTER TABLE `PREFIX_order_cart_rule` ADD `id_order_invoice` INT UNSIGNED NOT NUL
 
 ALTER TABLE `PREFIX_specific_price` ADD `id_group_shop` INT(11) UNSIGNED NOT NULL AFTER `id_shop`;
 
+/** ADDED BY RIPPLEWERKZ **/
+/** Fix unknown `reference` field in ps_orders **/
+/** Uncomment below sql only if there is issue **/
+/* ALTER TABLE `ps_orders` ADD `reference` VARCHAR(14) NOT NULL AFTER `id_address_invoice`; */
+/** END OF ADDING **/
+
 /* Generate order references */
 UPDATE `PREFIX_orders` SET `reference` = id_order;
 
@@ -419,4 +425,3 @@ PRIMARY KEY (`id_webservice_account` , `id_shop`),
 ) ENGINE=ENGINE_TYPE  DEFAULT CHARSET=utf8;
 
 ALTER TABLE `PREFIX_group` ADD `show_prices` tinyint(1) unsigned NOT NULL DEFAULT '1' AFTER `price_display_method`;
-
